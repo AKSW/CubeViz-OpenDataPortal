@@ -1,0 +1,28 @@
+<?php
+/**
+ * This file is part of the {@link http://ontowiki.net OntoWiki} project.
+ *
+ * @copyright Copyright (c) 2012, {@link http://aksw.org AKSW}
+ * @license http://opensource.org/licenses/gpl-license.php GNU General Public License (GPL)
+ */
+
+/**
+ * OntoWiki model list template
+ */
+
+?>
+
+<?php if (false == empty($this->models)): ?>
+    
+    <ul class="bullets-none separated has-contextmenus-block" id="modellist-list">
+        <?php foreach ($this->models as $graphUri => $modelDetails): ?>
+            <li>
+                <a class="<?php echo $modelDetails['selected'] ?>" href="<?php echo $this->cubevizUrl ."?m=". urlencode($graphUri); ?>" style="font-size: 11px;">
+                    <?php echo 30 < strlen ($modelDetails['label']) 
+                             ? substr ($modelDetails['label'], 0, 30) . '..'
+                             : $modelDetails['label']; ?>
+                </a>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+<?php endif; ?>

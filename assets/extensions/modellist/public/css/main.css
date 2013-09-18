@@ -1,0 +1,10 @@
+#modellist-list
+{
+    border-top: dotted 1px #ccc; 
+    border-bottom: dotted 1px #ccc; 
+    min-width: 230px; 
+    max-width: 230px; 
+    width: 230px; 
+    overflow-y: scroll; 
+    height: 150px;
+}

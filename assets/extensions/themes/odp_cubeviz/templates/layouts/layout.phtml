@@ -1,0 +1,343 @@
+<?php
+
+/**
+ * OntoWiki layout template
+ *
+ * @author  Norman Heino <norman.heino@gmail.com>
+ * @author  Michael Haschke
+ * @version $Id: layout.phtml 4308 2009-10-14 15:13:51Z jonas.brekle@gmail.com $
+ */
+
+?>
+<?php echo $this->doctype('XHTML1_STRICT') ?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head xmlns:update="http://ns.aksw.org/update/">
+    <?php echo $this->headTitle() ?>
+    <?php echo $this->headMeta() ?>
+    <?php echo $this->headLink() ?>
+    
+    <?php echo $this->partial('partials/meta.phtml') ?>
+    
+    <link rel="shortcut icon" type="image/x-icon" href="<?php echo $this->staticUrlBase;?>favicon.png" />
+    
+    <?php if ($this->has('jsonVars')): ?>
+        <script type="text/javascript">
+            <?php echo $this->jsonVars ?>
+        </script>
+    <?php endif; ?>
+
+    <?php if ($this->has('metaDescription')){ ?>
+        <meta name="Description" content="<?php echo $this->metaDescription ?>" />
+    <?php }  ?>
+    <?php if ($this->has('metaKeywords')){ ?>
+        <meta name="Keywords" content="<?php echo $this->metaKeywords ?>" />
+    <?php }  ?>
+    
+    <!-- ontowiki stylesheets -->
+    <link rel="stylesheet" href="<?php echo $this->themeUrlBase ?>styles/default.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="<?php echo $this->themeUrlBase ?>styles/clickmenu.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="<?php echo $this->themeUrlBase ?>styles/jquery-ui.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="<?php echo $this->themeUrlBase ?>styles/ec-custom.css" type="text/css" media="screen" />
+
+    <?php if (defined('_OWDEBUG')): ?>
+    <!-- developer styles, e.g. for deprecated and legacy gui elements -->
+    <link rel="stylesheet" href="<?php echo $this->themeUrlBase ?>styles/default.dev.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="<?php echo $this->themeUrlBase ?>styles/deprecated.dev.css" type="text/css" media="screen" />
+    <?php endif; ?>
+    
+    <!-- dynamic styles -->
+    <?php echo $this->headStyle() ?>
+
+    <!-- jQuery -->
+    <script type="text/javascript" src="<?php echo $this->themeUrlBase ?>scripts/libraries/jquery.js"></script>
+    <script type="text/javascript" src="<?php echo $this->themeUrlBase ?>scripts/libraries/jquery-ui.js"></script>
+    
+    <!-- included js libraries -->
+    <script type="text/javascript" src="<?php echo $this->themeUrlBase ?>scripts/libraries/jquery.json.js"></script>
+    <script type="text/javascript" src="<?php echo $this->themeUrlBase ?>scripts/libraries/jquery.livequery.js"></script>
+    <script type="text/javascript" src="<?php echo $this->themeUrlBase ?>scripts/libraries/jquery.clickmenu.js"></script>
+    <script type="text/javascript" src="<?php echo $this->themeUrlBase ?>scripts/libraries/jquery.simplemodal.js"></script>
+    <script type="text/javascript" src="<?php echo $this->themeUrlBase ?>scripts/libraries/jquery.tablesorter.js"></script>
+    <script type="text/javascript" src="<?php echo $this->themeUrlBase ?>scripts/libraries/jquery.rdfquery.rdfa-1.0.js"></script>
+
+    <!-- RDFa widgets -->
+    <!--script type="text/javascript" id="RDFauthorScript" src="<?php echo $this->libraryUrlBase ?>RDFauthor/src/rdfauthor.js"></script-->
+    
+    <!-- ontowiki js -->
+    <script type="text/javascript" src="<?php echo $this->themeUrlBase ?>scripts/main.js"></script>
+    <script type="text/javascript" src="<?php echo $this->themeUrlBase ?>scripts/support.js"></script>
+    <script type="text/javascript" src="<?php echo $this->themeUrlBase ?>scripts/jquery.ontowiki.js"></script>
+    
+    <!-- dynamic js -->
+    <?php echo $this->headScript() ?>
+    
+</head>
+
+<body class="javascript-off" xmlns:update="http://ns.aksw.org/update/">
+    
+    <script type="text/javascript">
+        // get body element
+        var body = document.body;
+        var bodyClass = body.className;
+        // set javascript = on
+        bodyClass = bodyClass.replace(/javascript-off/g, "javascript-on");
+        // set application in processing state
+        bodyClass = bodyClass + " is-processing";
+        // process changes
+        body.setAttribute("class", bodyClass, 0);
+        
+        $(document).ready (function(){
+            
+            $(".cubeviz-dataSelectionModule-middleBlock")
+                .css ("width", "130px");
+            
+            /**
+             * IE 7+ hacks
+             */
+            if ($.browser.msie && 7 <= parseInt($.browser.version, 10)) {
+                
+                /**
+                 * left sidebar corrections
+                 */                
+                $("#cubeviz")
+                    .css ("margin", "0px");
+                
+                $("#cubeviz-index-header")
+                    .css ("margin", "10px");
+                
+                $("#cubeviz-index-legend")
+                    .css ("margin", "10px");
+                    
+                $("#cubeviz-dataStructureDefinition-list")
+                    .css ("width", "250px")
+                    .css ("min-width", "250px");
+                    
+                $("#cubeviz-dataSet-list")
+                    .css ("width", "250px")
+                    .css ("min-width", "250px");
+                    
+                $("#cubeviz-footer-container")
+                    .css ("width", "260px")
+                    .css ("min-width", "260px");
+                    
+                $("#cubeviz-footer-showVisualizationButton")
+                    .css ("padding-right", "10px");
+                    
+                $(".section-sidewindows")
+                    .css ("margin-right", "10px")
+                    .css ("width", "295px");
+                    
+                /**
+                 * content area
+                 */
+                $(".highcharts-container")
+                    .css ("position", "static");
+                    
+                $("#cubeviz-index-visualization")
+                    .css ("margin-left", "10px")
+                    .css ("padding-left", "10px");
+                    
+                $(".cubeviz-legend-componentDimensionEntry h4")
+                    .css ("font-size", "14.5px")
+                    .css ("margin-top", "-6px")
+                    .css ("margin-left", "0px")
+                    .css ("margin-right", "0px")
+                    .css ("margin-bottom", "0px")
+                    .css ("padding", "0px");
+                    
+                $(".cubeviz-legend-observationIcon")
+                    .css ("min-height", "60px");
+                    
+                $(".cubeviz-legend-observationLabel")
+                    .css ("font-size", "12.5px")
+                    .css ("font-weight", "bold")
+                    .css ("margin", "0px")
+                    .css ("padding", "0px");
+                    
+                $(".cubeviz-legend-observationValue")
+                    .css ("font-size", "13.5px")
+                    .css ("color", "#2B2B68");
+                    
+                $(".cubeviz-legend-observationInfoList")
+                    .css ("margin-left", "20px")
+                    .css ("margin-top", "-10px")
+                    .css ("padding-top", "-10px");
+                    
+                $(".cubeviz-legend-observationInfoListEntry")
+                    .css ("font-size", "13px");
+            } 
+            
+            // IE 7 specific
+            if ($.browser.msie && 7 == parseInt($.browser.version, 10)) {
+                
+                $(".cubeviz-legend-componentDimensionIcon")
+                    .css ("min-height", "60px");
+
+                $(".highcharts-container")
+                    .css ("width",($(document).width()-450) + "px");
+
+                $("#cubeviz-index-visualization")
+                    .css ("width",($(document).width() - 450) + "px");
+
+                $(".section-sidewindows")
+                    .css ("width","280px")
+                    .css ("overflow", "hidden");
+
+                $("#modellist-hideShowBtn")
+                    .css ("z-index","1001")
+                    .css ("display", "inline")
+                    .css ("width", "100");
+                    
+                $("#cubeviz-modelinfoDiv")
+                    .css ("margin-left", "30px");
+                    
+                $("#cubeviz-dataSelectionModule-dataSelection")
+                    .css ("width", "270px");
+                    
+                $("#cubeviz-footer-showVisualizationButton")
+                    .css ("margin-right", "20px");
+                
+                $("#staticlinks")
+                    .css ("position", "absolute")
+                    .css ("top", "700px")
+                    .css ("left", "5px");
+            }
+            
+            // IE 8 specific
+            if ($.browser.msie && 8 == parseInt($.browser.version, 10)) {
+                
+                $("#cubeviz-modelinfoDiv")
+                    .css ("margin-left", "30px");
+                
+                /**
+                 * legend
+                 */
+                $(".cubeviz-legend-observationIcon")
+                    .css ("min-height", "100px");
+                
+                $(".cubeviz-legend-componentDimensionIcon")
+                    .css ("min-height", "55px");
+                    
+                /**
+                 * visualization menu
+                 */                
+                $(".cubeviz-visualizationselector-selector")
+                    .css ("width", "auto")
+                    .css ("min-width", "200px");
+                 
+                $(".cubeviz-visualizationselector-selectedSelectorItem")
+                    .css ("display", "inline")
+                    .css ("height", "30px");
+                
+                $(".cubeviz-visualizationselector-selectorItem")
+                    .css ("display", "inline")
+                    .css ("height", "30px");
+                
+                $(".cubeviz-icon-small")
+                    .css ("display", "inline")
+                    .css ("margin", "0px")
+                    .css ("max-width", "20px")
+                    .css ("min-width", "20px")
+                    .css ("padding-bottom", "4px")
+                    .css ("text-align", "left")
+                    .css ("width", "20px");
+            }
+            
+            // IE 9 specific
+            if ($.browser.msie && 9 == parseInt($.browser.version, 10)) {
+                
+                $("#cubeviz-index-visualization")
+                    .css ("margin-left", "0px");
+            }            
+            
+            /**
+             * Load title inside the ec-region div
+             */
+            // use label if set, otherwise the model url
+            if ('undefined' != typeof _) {
+                var modelLabel = false === _.isUndefined(cubeVizApp._.backend.modelInformation["http://www.w3.org/2000/01/rdf-schema#label"])
+                    ? cubeVizApp._.backend.modelInformation["http://www.w3.org/2000/01/rdf-schema#label"].content
+                    : cubeVizApp._.backend.modelUrl;
+                    
+                $("#ec-regionContent").html("Selected RDF DataCube: " + modelLabel);
+            }
+        });
+    </script>
+    
+    <?php echo $this->inlineScript() ?>
+    
+		<div class="header">
+				<div id="header-menu">  
+				    <div class="region-header-menu">
+						<div id="block-menu-menu-service-menu" class="block block-menu">
+							<div class="content">
+								<ul class="menu">
+									<li class="first leaf"><a href="http://ec.europa.eu/geninfo/legal_notices_en.htm" title="">Legal notice</a></li>
+									<li class="leaf"><a href="/open-data/contact" title="">Contact</a></li>
+									<li class="last leaf"><a href="http://ec.europa.eu/geninfo/query/search_en.html" title="">Search</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			<div class="logo">
+				<a id="logo" rel="Home" title="Home" href="../">
+					<img alt="Home" src="<?php echo $this->themeUrlBase ?>/images/logo_en.gif">
+				</a>
+			</div>
+		</div>
+
+        <div class="breadcrumb-custom">
+				<a href="http://ec.europa.eu">European Commission</a>
+				<span class="seperator">&gt;</span>
+				<a href="/" class="active">Open Data Portal</a>
+				<span class="seperator">&gt;</span>
+				<span class="last">CubeViz</span>
+        </div>
+        <div id="ec-region">
+                <div id="modellist-hideShowBtn" style="float:left; margin:6px 20px 6px 20px">Open Settings</div>
+                <?php 
+                    if( isset(Erfurt_App::getInstance()->getConfig()->store->sparql->serviceUrl) && 
+                        !isset(OntoWiki::getInstance()->selectedModel)) : ?>
+                    <style>
+                        #sparqlservices {
+                            display:block;
+                            }
+                        #modellist {
+                            display:block;
+                            }
+
+                    </style>
+                <?php endif; ?>
+                
+            <div id="ec-regionContent"></div>
+        </div>
+
+    <div id="odp-contentArea" style="position:absolute; left: 280px; right: 5px; border:0px; height:auto">
+        <div class="window" style="height:100%">
+            <?php
+                /**
+                 * @trigger onDisplayMainWindowTitle
+                 */
+                require_once 'Erfurt/Event.php';
+                $event = new Erfurt_Event('onDisplayMainWindowTitle');
+                $event->setDefault($this->placeholder('main.window.title'));
+                $title = $event->trigger();
+            ?>
+            
+            <div class="content">
+                <?php echo $this->layout()->content ?>
+            </div><!-- .content -->
+            
+        </div><!-- .window -->
+    </div><!-- .section-mainwindows -->
+
+    <div class="section-sidewindows"> 
+		<div id="cv_Headline" class="moduleHeadline" >
+			<img src ="<?php echo $this->themeUrlBase ?>/images/CubeViz_Logo_blue_small.png" style="margin-left: 1em; padding-top:17px; float:left">
+			<div style="margin-left: 3em; padding-top:14px;">CubeViz</div></div>    
+    <!-- <div style="position:absolute; left: 0px; top: 125px; bottom: 0px; width: 275px; padding-left:10px;"> -->
+        <?php echo $this->placeholder('main.sidewindows') ?>
+    </div><!-- .section-sidewindows -->
+</body>
+</html>

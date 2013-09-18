@@ -1,0 +1,111 @@
+<link rel="stylesheet" type="text/css" href="<?php echo $_REQUEST ['urlBase']; ?>extensions/page/page/colorbox/colorbox.css"/>
+<script type="text/javascript" src="<?php echo $_REQUEST ['urlBase']; ?>extensions/page/page/colorbox/jquery.colorbox-min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $("a.gallery").colorbox({transition:"none", width:"75%", height:"75%"});
+});
+</script>
+
+<style>
+    #dataselection {
+        display : none;
+        height: 0;
+    }
+    #cv_Headline {
+        display : none;
+        height: 0;
+    }
+</style>
+
+<div style="    margin-top: 0px; 
+                margin-left: 0px; 
+                min-height: 100%; height:auto !important; height:100%;">
+    
+    <div>
+        <div style="background-color:#E9EFF3; padding: 2em; margin:2em; margin-top:1em">                
+            <div>
+                <div style="float:left; text-align:center; height:100px; border:0px solid black; padding-top: 1em; margin-right:2em">
+                <a href="<?php echo $_REQUEST ['urlBase']; ?>extensions/page/page/images/CubeViz_Logo_blue.png" class="gallery" rel="gallery-0" title="CubeViz Logo">
+                   <img src="<?php echo $_REQUEST ['urlBase']; ?>extensions/page/page/images/CubeViz_Logo_blue.png" style="height:100px">
+                </a>            
+                </div>
+                <h2 style="margin: 0em; padding:0; font-size: 18px; font-weight:bold; color: #6386A4;">CubeViz</h2>
+                <span style="margin-top: 0em; font-size: 14px; color: #6386A4;">THE RDF DATACUBE BROWSER</span>
+                <p style="margin-top: 1em; color: #4A4A4A; width: 96%;">
+                    Welcome to CubeViz - the facetted browser for statistical data in the Linked Data Web.
+                    CubeViz was set up and adopted to be part of the Data Portal of the European Union.
+                </p>
+                <div style="clear:both"></div>
+            </div>
+            <h3 style="margin-top: 2em; font-size: 14px; font-weight:bold; color: #6386A4;">Start CubeViz</h3>
+
+            <?php 
+                if(isset(OntoWiki::getInstance()->selectedModel)) : ?>
+            <em>
+                CubeViz receives data from configured data provider (default or user-selected). 
+                If the dataset contain statistical data according a few constraints, CubeViz is able to process the data.
+                Please click on the first of the following button to start CubeViz directly, or click the second one to receive additional information 
+                about the configured dataset.
+            </em>
+                <br/>
+                <br/>
+                <div class="modelinfo-Btn" style="width: 180px; float: left;">
+                    <i class="icon-bar-chart"></i>
+                    &nbsp; <a href="<?php echo $_REQUEST ['urlBase']; ?>cubeviz/">Start CubeViz</a>
+                </div>
+                <div class="modelinfo-Btn" style="width: 190px;">
+                    <i class="icon-info-sign"></i>
+                    &nbsp; <a href="<?php echo $_REQUEST ['urlBase']; ?>cubeviz/modelinfo">Show dataset information</a>
+                </div>
+            <?php else: ?>
+                <em>Currently, no valid dataset is selected, Please Open settings (upper right corner of the screen) to select a datasource and a dataset.</em>
+            <?php endif; ?>
+            <br>
+    </div>
+
+    <h2 style="margin-top: 1em; margin-left: 2em; font-size: 14px; color: #6386A4;">Brief introduction to CubeViz</h2>
+    <p style="margin-top: 1em; margin-left: 2em; color: #4A4A4A; width: 96%;">
+        Since the amount of available statistical data in the web is increasing in the past years, user-friendly accessibility to such data is becoming equally important            
+        There are also numerous statistical datasets published within the DataPortal by the European Commission.
+        In dependence of the data format of these datasets (i.e. XLS, CSV), the containing data can be browsed by users with the help of different tools such as Google spreadsheet, Libre Office or MS Office.
+        One of the upcoming data formats is the <a href="http://www.w3.org/RDF/" target="_blank">Resource Description Format (RDF)</a> which is designed to represent data not on a 
+        document/text level but on a the level of information and facts.
+        Furthermore RDF enables publishers to encode not only data items but also underlaying semantics. 
+        In order to represent such semantics, domain-specific vocabularies can be re-used or - if not available - can be generated.
+        <br> 
+        The <a href="http://www.w3.org/TR/vocab-data-cube/" target="_blank">RDF DataCube vocabulary</a> is one of the vocabularies used to encode statistics. 
+        There is an increasing amount of tools dealing with RDF in order to facilitate users to browse datasets encoded in this way.
+        One of these tools is <a href="http://aksw.org/Projects/OntoWiki.html" target="_blank">OntoWiki</a> that ficilitates users to browse RDF data in a generic way.
+        CubeViz was developed based on <em>OntoWiki</em> with the scope of offering user-friendly exploration possibilities for statistical data 
+        represented in RDF with the RDF DataCube vocabulary.
+    </p>
+
+    <div>
+        <div style="float:left; width:55%;min-width:400px">
+            <h2 style="margin-top: 1em; margin-left: 2em; font-size: 14px; color: #6386A4;">HowTo and FAQ</h2>    
+            <p style=" margin-left: 2em; color: #4A4A4A; width: 96%;">
+                CubeViz represents the statistical dataset to be visualized as a facetted based browsing component (located on the left side of the screen).
+                This component enables the users to select interesting parts of the dataset. 
+                After selection the user can proceed while clicking on the button <em>Update Selection / Update Chart</em>. 
+                One can instantly start using CubeViz while clicking on the button <b>Start CubeViz</b> above.
+                As a result CubeViz processes a chart according to user's selection.
+                The current version of CubeViz processes basic chart types - such as <em>line</em>, <em>bar</em> and <em>pie chart</em> facilitating the exploration of up to two 
+                statistical dimensions in a data structure.
+            </p>
+            <p style="margin-top: 1em; margin-left: 2em; color: #4A4A4A; width: 96%;">            
+                If you need further information of how to use CubeViz have a look on our <a href="<?php echo $_REQUEST ['urlBase']; ?>page/howto">HowTo</a> 
+                or <a href="<?php echo $_REQUEST ['urlBase']; ?>page/faq">FAQ</a> page.
+            </p>
+        </div>
+            <div style="float:right; margin:1em; text-align:center; height:320px; border:0px solid black; min-width:330px">
+                <a href="<?php echo $_REQUEST ['urlBase']; ?>extensions/page/page/images/cubeviz-home-polar.png" class="gallery" rel="gallery-0" title="CubeViz Output of the Digital Agenda Scoreboard DataCube">
+                   <img src="<?php echo $_REQUEST ['urlBase']; ?>extensions/page/page/images/cubeviz-home-polar.png" style="height:300px">
+                   <br> CubeViz Polar Chart
+                </a>                
+    </div>
+
+    </div>
+    </p>
+    <div style="clear:both"></div>
+    </div>
+</div>

@@ -1,0 +1,77 @@
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owconfig: <http://ns.ontowiki.net/SysOnt/ExtensionConfig/> .
+@prefix extension: <http://ns.ontowiki.net/Extensions/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix event: <http://ns.ontowiki.net/SysOnt/Events/> .
+@prefix : <https://github.com/AKSW/modellist/raw/master/doap.n3#> .
+
+<> foaf:primaryTopic :sparqlservices .
+:sparqlservices a doap:Project ;
+  doap:name "sparqlservices" ;
+  owconfig:privateNamespace <https://github.com/AKSW/sparqlservices.ontowiki/raw/master/doap.n3#> ;
+  owconfig:enabled "true"^^xsd:boolean ;
+  rdfs:label "Sparql Endpoints" ;
+  doap:description "provides a list of pre-configured or user given sparql backends, that can be switched. As a constraint you have to enable the sparql backend." ;
+  owconfig:authorLabel "Michael Martin" ;
+    owconfig:authorLabel "Konrad Abicht" ;
+  doap:maintainer <http://aksw.org> ;
+  owconfig:class "has-contextmenus-block" ;
+  owconfig:hasModule :Default ;
+  owconfig:config :SparqlServicesConfig ;
+  owconfig:templates "public/templates" ;
+  owconfig:pluginEvent event:onBeforeInitialisingStore .
+:Default a owconfig:Module ;
+  rdfs:label "Default" ;
+  owconfig:priority "0" ;
+  owconfig:caching "true"^^xsd:boolean ;
+  owconfig:context "main.sidewindows" .
+:sparqlservices doap:release :v0-1 .
+:v0-1 a doap:Version ;
+  doap:revision "0.1" .
+
+:SparqlServicesConfig a owconfig:Config; 
+  owconfig:id "SparqlServicesConfig";
+    rdfs:label "Sparql Endpoints" ;
+    :userInputAllowed "false"^^xsd:boolean ; 
+    :discoveryEnabled "false"^^xsd:boolean ;
+    :showServicesModule "true"^^xsd:boolean ;
+  owconfig:config [ 
+    a owconfig:Config; 
+    owconfig:id "endpoints";
+    owconfig:config [
+      a owconfig:Config;
+      owconfig:id "endpoint-1" ;
+      :icon "" ;
+      rdfs:label "Digital Agenda Data" ;
+      :address <http://digital-agenda-data.eu/data/sparql> ;
+      owconfig:config [
+        a owconfig:Config;
+        owconfig:id "models" ;
+        owconfig:config [
+          a owconfig:Config;
+          owconfig:id "model-1" ;
+          :modelUri <http://semantic.digital-agenda-data.eu/CubeViz>
+        ]
+      ]
+    ]
+  ] ;
+  owconfig:config [
+    a owconfig:Config; 
+    owconfig:id "repos";
+    owconfig:config [
+      a owconfig:Config;
+      owconfig:id "service-1" ;
+      :icon "" ;
+      rdfs:label "Open Data Portal" ;
+      :address <http://localhost/>
+    ] ;
+    owconfig:config [
+      a owconfig:Config;
+      owconfig:id "service-2" ;
+      :icon "" ;
+      rdfs:label "Public Data" ;
+      :address <http://localhost/>
+    ]
+  ] .
