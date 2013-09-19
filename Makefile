@@ -10,7 +10,7 @@ install:
 	@echo "Install OntoWiki (branch feature/remoteSparqlEndpoint)"	
 	@echo "######################################################"
 	@echo ""
-	git clone git@github.com:AKSW/OntoWiki.git application
+	git clone https://github.com/AKSW/OntoWiki.git application
 	cd application && git checkout feature/remoteSparqlEndpoint && git pull
 	
 	@echo ""
@@ -19,7 +19,7 @@ install:
 	@echo "Setup OntoWiki"	
 	@echo "##############"
 	@echo ""
-	cd application && make install
+	cd application && make deploy
 	
 	@echo ""
 	@echo ""
@@ -35,7 +35,7 @@ install:
 	@echo "Install and setup CubeViz (branch master)"	
 	@echo "#########################################"
 	@echo ""
-	cd application/extensions && git clone git@github.com:AKSW/cubeviz.ontowiki.git cubeviz && cd cubeviz && git checkout master && make install
+	cd application/extensions && git clone https://github.com/AKSW/cubeviz.ontowiki.git cubeviz && cd cubeviz && git checkout master && make install
 	
 	@echo ""
 	@echo ""
@@ -43,7 +43,7 @@ install:
 	@echo "Install and setup sparqlservices (branch master)"	
 	@echo "################################################"
 	@echo ""
-	cd application/extensions && git clone git@github.com:AKSW/sparqlservices.ontowiki.git sparqlservices
+	cd application/extensions && git clone https://github.com/AKSW/sparqlservices.ontowiki.git sparqlservices
 	cp assets/extensions/sparqlservices/doap.n3 application/extensions/sparqlservices
 	
 	@echo ""
