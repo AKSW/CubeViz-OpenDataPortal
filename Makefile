@@ -1,7 +1,10 @@
 default:
-	@echo "CubeViz Deployment"
+	@echo "CLI - CubeViz OpenDataPortal Deployment"
 	@echo ""
-	@echo "  use 'make install' to setup repository"
+	@echo "  use "
+	@echo "     'make install' to setup this repository"
+	@echo "     'make package' to create an archive containing an OntoWiki, Erfurt, "
+	@echo "                    CubeViz, ..., runable out-of-the-box!"
 
 install:
 	@echo ""
@@ -81,3 +84,6 @@ install:
 	@echo "    > to create a symbolic link to application folder"
 	@echo "##################################################"
 	@echo ""
+
+make package:
+	sh scripts/createPackage.sh
