@@ -14,7 +14,7 @@ install:
 	@echo "######################################################"
 	@echo ""
 	git clone https://github.com/AKSW/OntoWiki.git application
-	cd application && git checkout feature/remoteSparqlEndpoint && git pull
+	cd application && git checkout d3ded65717244aa5c5b7cf774bc10382907c4bc3
 	
 	@echo ""
 	@echo ""
@@ -30,7 +30,7 @@ install:
 	@echo "Install Erfurt (branch feature/remoteSparqlEndpoint)"	
 	@echo "###################################################"
 	@echo ""
-	cd application/libraries/Erfurt && git fetch && git checkout feature/remoteSparqlEndpoint
+	cd application/libraries/Erfurt && git fetch && git checkout 53c33e57c4d43a055a50e945c7928af4808c3aaa
 	
 	@echo ""
 	@echo ""
